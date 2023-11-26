@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменить мои данные</title>
+    <script src="https://unpkg.com/imask"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+
+            background-color: #7e4caf;
+            color: #fff;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #e79a11;
+        }
+
+        .message {
+            color: #7e4caf;
+        }
+
+        .message:hover {
+            color: #e79a11;
+        }
+
+        .form-control:focus {
+            border-color: #7e4caf;
+            box-shadow: 0 0 5px #7e4caf;
+        }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #fff;
+            background-color: #580b98;
+            border-color: #580b98;
+        }
+
+    </style>
+</head>
+<body>
+<br><br>
+<div class="container">
+    <h2 style="margin-bottom:15px" class="text-center">Изменение данных</h2>
+    <form action="/change-my-data" method="post">
+        <div class="form-group">
+            <label for="username">Login</label>
+            <input th:value="${login}" name="login" type="text" id="username" class="form-control focus" required>
+            <p style="color: #fa3030" th:text="${errorMessage}"></p>
+        </div>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input th:value="${fullName}" name="fullName" type="text" id="fullName" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone-input">Phone</label>
+            <input th:value="${phone}" name="phone" minlength="19"  type="text" id="phone-input" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input th:value="${email}" name="email" type="email" id="email" class="form-control" required>
+        </div>
+        <button id="reg_btn" type="submit" class="btn btn-primary btn-block">Подтвердить</button>
+    </form>
+</div>
+
+<!--Маска ввода телефона-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var phoneInput = document.getElementById('phone-input');
+        var phoneMask = IMask(phoneInput, {
+            mask: '+000 (00) 000-00-00',
+            placeholderChar: 'X',
+            lazy: false
+        });
+    });
+</script>
+
+<!-- Блокировка кнопки -->
+<script>
+    var inputField = document.getElementById('phone-input');
+    var submitButton = document.getElementById('reg_btn');
+
+    inputField.addEventListener('keyup', function() {
+
+        if (inputField.value.includes('X')) {
+            submitButton.disabled = true; // Добавляем атрибут disabled
+        } else {
+            submitButton.disabled = false; // Удаляем атрибут disabled
+        }
+    });
+
+</script>
+
+</body>
+</html>

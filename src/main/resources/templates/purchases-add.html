@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить заказ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="blocks/header-admin :: header-admin"> </header>
+
+<div class="container mt-5 mb-5">
+    <h1>Добавление заказа</h1>
+    <form action="/purchases/add" method="post" enctype="multipart/form-data">
+<!--        <input type="text" name="user" placeholder="Введите название нового банкетного зала" class="form-control">-->
+<!--        <br>-->
+
+        <div>
+            <div style="color:gray">Выберите заказчика:</div>
+            <select  id="userSelect" name= "user" class="form-select">
+                <div th:each="el : ${users}">
+                    <option th:value="${el.customer_id}" th:text="${el.fio}" th:id="${el.phone}"/>
+                </div>
+            </select>
+        </div>
+
+        <br>
+        <div>
+            <div style="color:gray">Выберите зал:</div>
+            <select  id="hallSelect" name= "hall" class="form-select" >
+                <div th:each="el : ${halls}">
+                    <option th:value="${el.banquet_halls_id}" th:text="${el.banquet_halls_name}" th:id="${el.price}"/>
+                </div>
+            </select>
+        </div>
+
+        <br>
+        <div style="color:gray">Дата аренды:</div>
+        <input required type="date" name="date" placeholder="Дата аренды" class="form-control">
+        <br>
+
+        <button type="submit" class="btn btn-success">Добавить заказ</button>
+    </form>
+</div>
+
+<!--<footer th:insert="blocks/footer :: footer"> </footer>-->
+
+</body>
+
+</html>

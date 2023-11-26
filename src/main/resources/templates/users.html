@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Учётные записи</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .form-container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .form-container .form-group label {
+            display: block;
+            margin-bottom: 1px;
+            color: black;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .form-container .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: black;
+            font-family: inherit;
+            background-color: transparent;
+            border: 1px solid #414141;
+        }
+
+        .form-container .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            resize: none;
+            color: black;
+            height: 96px;
+            border: 1px solid #414141;
+            background-color: transparent;
+            font-family: inherit;
+        }
+
+        .form-container .form-group input::placeholder {
+            opacity: 0.5;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .display-none{
+            display:none;
+        }
+
+        .form-select:focus {
+            border-color: #7e4caf;
+            box-shadow: 0 0 5px #7e4caf;
+        }
+
+        .form-input-price:focus
+        {
+            border:2px;
+            border-color: #7e4caf;
+            box-shadow: 0 0 5px #7e4caf;
+        }
+    </style>
+</head>
+
+<body>
+<header th:insert="blocks/header-admin :: header-admin"></header>
+
+<br>
+<section class="py-1 container">
+    <h1>Поиск</h1>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-container">
+
+            <div class="form-group">
+                <label for="login">Логин:</label>
+                <input  class="form-input-price" style="height:37px;margin-bottom:8px"  id="login" type="text" name="login">
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input  class="form-input-price"  style="height:37px;margin-bottom:8px" id="email" type="text" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="fio">ФИО:</label>
+                <input  class="form-input-price"  style="height:37px;margin-bottom:8px" id="fio" type="text" name="fio">
+            </div>
+
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input  class="form-input-price"  style="height:37px;margin-bottom:8px" id="phone" type="text" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Роль:</label>
+                    <select  class="form-select select-role" style="margin-bottom:8px"  id="role" name="role">
+                        <div th:each="el : ${roles}">
+                            <option th:value="${el}" th:text="${el}" />
+                        </div>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-2">
+    <h1>Учётные записи</h1>
+
+    <table>
+        <tr>
+            <th>Логин</th>
+            <th>Пароль</th>
+            <th>Роль</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+    <tr th:each="user : ${users}">
+        <td class="login" th:id="${user.login}" th:text="${user.login}"></td>
+        <td class="password" th:id="${user.password}" th:text="${user.password}"></td>
+        <td class="role" th:id="${user.role}" th:text="${user.role}"></td>
+        <td class="fio" th:id="${user.fio}" th:text="${user.fio}"></td>
+        <td class="phone" th:id="${user.phone}" th:text="${user.phone}"></td>
+        <td class="email" th:id="${user.email}" th:text="${user.email}"></td>
+        <td style="width:70px">
+        <form style="width:70px" th:action="'/users/'+ ${user.customer_id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">Удалить</button>
+        </form>
+        </td>
+        <td style="width:132px">
+            <a th:href="'users/'+ ${user.customer_id} + '/change'"><button class="btn btn-warning">Редактировать</button></a>
+        </td>
+    </tr>
+    </table>
+
+
+</div>
+
+<!--<footer th:insert="blocks/footer :: footer"></footer>-->
+
+<script>
+    var roleSelect = document.getElementById('role');
+    var newOption = document.createElement("option")
+    newOption.value = "Все роли"
+    newOption.text = "Все роли"
+    newOption.selected = true
+    roleSelect.appendChild(newOption)
+
+    var phoneField = document.getElementById('phone');
+    var fioField = document.getElementById('fio');
+    var emailField = document.getElementById('email');
+    var loginField = document.getElementById('login');
+
+
+    roleSelect.addEventListener('change', find );
+    phoneField.addEventListener('input', find );
+    fioField.addEventListener('input', find );
+    emailField.addEventListener('input', find );
+    loginField.addEventListener('input', find );
+
+    function find(){
+
+        var loginsTd =  document.getElementsByClassName("login")
+        var rolesTd =  document.getElementsByClassName("role")
+        var emailsTd = document.getElementsByClassName("email")
+        var fiosTd = document.getElementsByClassName("fio")
+        var phonesTd = document.getElementsByClassName("phone")
+
+        var login = document.getElementById("login");
+        var email = document.getElementById("email");
+        var fio = document.getElementById("fio");
+        var phone = document.getElementById("phone");
+
+        var roleSelect = document.getElementById("role");
+        var selectedRoleIndex = roleSelect.selectedIndex;
+        var selectedRole = roleSelect.options[selectedRoleIndex];
+        if(selectedRole.value == "Все роли"){
+            for(var i = 0; i < rolesTd.length; i++){
+                rolesTd[i].parentNode.classList.remove("display-none");
+
+                if( !phonesTd[i].id.includes(phone.value) && phone.value != ""){
+                    phonesTd[i].parentNode.classList.add("display-none");
+                }
+                if( !fiosTd[i].id.includes(fio.value) && fio.value != ""){
+                    fiosTd[i].parentNode.classList.add("display-none");
+                }
+                if( !emailsTd[i].id.includes(email.value) && email.value != ""){
+                    emailsTd[i].parentNode.classList.add("display-none");
+                }
+                if( !loginsTd[i].id.includes(login.value) && login.value != ""){
+                    loginsTd[i].parentNode.classList.add("display-none");
+                }
+            }
+        }
+        else{
+            for(var i = 0; i < rolesTd.length; i++){
+                rolesTd[i].parentNode.classList.remove("display-none");
+
+                if( !phonesTd[i].id.includes(phone.value) && phone.value != ""){
+                    phonesTd[i].parentNode.classList.add("display-none");
+                }
+                if( !fiosTd[i].id.includes(fio.value) && fio.value != ""){
+                    fiosTd[i].parentNode.classList.add("display-none");
+                }
+                if( !emailsTd[i].id.includes(email.value) && email.value != ""){
+                    emailsTd[i].parentNode.classList.add("display-none");
+                }
+                if( !loginsTd[i].id.includes(login.value) && login.value != ""){
+                    loginsTd[i].parentNode.classList.add("display-none");
+                }
+            }
+            for(var i = 0; i < rolesTd.length; i++){
+                if(rolesTd[i].id != selectedRole.value){
+                    rolesTd[i].parentNode.classList.add("display-none");
+                }
+            }
+        }
+
+    }
+</script>
+
+</body>
+
+</html>

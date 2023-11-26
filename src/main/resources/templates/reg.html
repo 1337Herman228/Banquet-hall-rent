@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <script src="https://unpkg.com/imask"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+
+            background-color: #7e4caf;
+            color: #fff;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #e79a11;
+        }
+
+        .message {
+            color: #7e4caf;
+        }
+
+        .message:hover {
+            color: #e79a11;
+        }
+
+        .form-control:focus {
+            border-color: #7e4caf;
+            box-shadow: 0 0 5px #7e4caf;
+        }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #fff;
+            background-color: #580b98;
+            border-color: #580b98;
+        }
+
+        .toggle-icon {
+            width:30px;
+            height:30px;
+            position: absolute;
+            top: 209px;
+            right: 453px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Registration</h2>
+    <form action="/reg" method="post">
+        <div class="form-group">
+            <label for="username">Login</label>
+            <input th:value="${login}" name="login" type="text" id="username" class="form-control focus" required>
+            <p style="color: #fa3030" th:text="${errorMessage}"></p>
+        </div>
+        <div class="form-group">
+            <label for="password-input">Password</label>
+            <input style=" padding-right: 24px;" name="password" type="password" id="password-input" class="form-control" minlength="6" required>
+            <span class="toggle-icon" onclick="togglePasswordVisibility()">
+                   <img width="21px" height="21px" src="./images/eye_open.png"/>
+            </span>
+            <p id="password-strength"></p>
+        </div>
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input th:value="${fullName}" name="fullName" type="text" id="fullName" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone-input">Phone</label>
+            <input th:value="${phone}" name="phone" minlength="19"  type="text" id="phone-input" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input th:value="${email}" name="email" type="email" id="email" class="form-control" required>
+        </div>
+        <button id="reg_btn" type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+    <p class="text-center mt-3">Already have an account? <a href="/login" class="message">Login</a></p>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password-input");
+        var toggleIcon = document.querySelector(".toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.innerHTML = '<img width="21px" height="21px" src="./images/eye_close.png"/>'; // Измените иконку на переключение видимости пароля
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.innerHTML = '<img width="21px" height="21px" src="./images/eye_open.png"/>'; // Измените иконку на переключение видимости пароля
+        }
+    }
+</script>
+
+<!--Маска ввода телефона-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var phoneInput = document.getElementById('phone-input');
+        var phoneMask = IMask(phoneInput, {
+            mask: '+000 (00) 000-00-00',
+            placeholderChar: 'X',
+            lazy: false
+        });
+    });
+</script>
+
+<!--Сложность пароля-->
+<script>
+    const passwordInput = document.getElementById('password-input');
+    const passwordStrength = document.getElementById('password-strength');
+
+    passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+        const strength = checkPasswordStrength(password);
+
+        // Изменяем цвет или текст в зависимости от надежности пароля
+        if (strength === 'strong') {
+            passwordStrength.style.color = 'green';
+            passwordStrength.textContent = 'Safe password';
+        } else if (strength === 'medium') {
+            passwordStrength.style.color = 'orange';
+            passwordStrength.textContent = 'Medium password';
+        } else {
+            passwordStrength.style.color = 'red';
+            passwordStrength.textContent = 'Weak password';
+        }
+    });
+
+    function checkPasswordStrength(password) {
+        if (password.length >= 8) {
+            return 'strong'; // Пароль считается надежным, если его длина больше или равна 8 символам
+        } else if (password.length >= 6) {
+            return 'medium'; // Пароль считается средним, если его длина больше или равна 6 символам
+        } else {
+            return 'weak'; // Пароль считается слабым, если его длина меньше 6 символов
+        }    }
+</script>
+
+<!-- Блокировка кнопки зарегистрироваться-->
+<script>
+    var inputField = document.getElementById('phone-input');
+    var submitButton = document.getElementById('reg_btn');
+
+    inputField.addEventListener('keyup', function() {
+
+        if (inputField.value.includes('X')) {
+            submitButton.disabled = true; // Добавляем атрибут disabled
+        } else {
+            submitButton.disabled = false; // Удаляем атрибут disabled
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

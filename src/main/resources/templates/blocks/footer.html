@@ -1,0 +1,194 @@
+
+<div th:fragment="footer">
+
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .up {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5em;
+        }
+
+        .down {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5em;
+        }
+
+        .card1 {
+            width: 75px;
+            height: 75px;
+            outline: none;
+            border: none;
+            background: #a9a8a817;
+            border-radius: 75px 5px 5px 5px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            transition: .2s ease-in-out;
+        }
+
+        .instagram {
+            margin-top: 1.5em;
+            margin-left: 1.2em;
+            fill: #cc39a4;
+        }
+
+        .card2 {
+            width: 75px;
+            height: 75px;
+            outline: none;
+            border: none;
+            background: #a9a8a817;
+            border-radius: 5px 75px 5px 5px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            transition: .2s ease-in-out;
+        }
+
+        .twitter {
+            margin-top: 1.5em;
+            margin-left: -.9em;
+            fill: #03A9F4;
+        }
+
+        .card3 {
+            width: 75px;
+            height: 75px;
+            outline: none;
+            border: none;
+            background: #a9a8a817;
+            border-radius: 5px 5px 5px 75px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            transition: .2s ease-in-out;
+        }
+
+        .github {
+            margin-top: -.6em;
+            margin-left: 1.2em;
+        }
+
+        .card4 {
+            width: 75px;
+            height: 75px;
+            outline: none;
+            border: none;
+            background: #a9a8a817;
+            border-radius: 5px 5px 75px 5px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            transition: .2s ease-in-out;
+        }
+
+        .discord {
+            margin-top: -.9em;
+            margin-left: -1.2em;
+            fill: #e79a11;
+        }
+
+        .card1:hover {
+            cursor: pointer;
+            scale: 1.1;
+            background-color: #cc39a4;
+        }
+
+        .card1:hover .instagram {
+            fill: white;
+        }
+
+        .card2:hover {
+            cursor: pointer;
+            scale: 1.1;
+            background-color: #03A9F4;
+        }
+
+        .card2:hover .twitter {
+            fill: white;
+        }
+
+        .card3:hover {
+            cursor: pointer;
+            scale: 1.1;
+            background-color: #0d25a9;
+        }
+
+        .card3:hover .github {
+            fill: white;
+        }
+
+        .card4:hover {
+            cursor: pointer;
+            scale: 1.1;
+            /*            background-color: #8c9eff;*/
+            background-color: #e79a11;
+        }
+
+        .card4:hover .discord {
+            fill: white;
+        }
+
+        p {
+            margin-bottom: 0rem;
+        }
+    </style>
+<br>
+<footer class="text-body-secondary py-2">
+
+        <div class="sexy_footer container" style="width:90%">
+            <hr>
+            <div class="row">
+                <div class="col-md-5">
+                    <h3 style="font-weight:bold">О нас</h3>
+                    <p>Мы предоставляем широкий выбор просторных и элегантных банкетных залов для любого события. Наша команда профессионалов готова помочь вам организовать незабываемое мероприятие.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 style="font-weight:bold">Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Адрес: г. Минск, ул. Платонова 39</p>
+                    <p><i class="fas fa-phone"></i> Телефон: 8 (017) 293-21-14</p>
+                    <p><i class="fas fa-envelope"></i> Email: dekief@bsuir.by</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="main">
+                        <div class="up">
+
+                            <a href="https://www.instagram.com/monkedeeluffi/">
+                            <button class="card1">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="30px" height="30px" fill-rule="nonzero" class="instagram"><g fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8,8)"><path d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91406,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91406 6.46875,-6.46875v-9.0625c0,-3.55078 -2.91406,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM21.90625,9.1875c-0.50391,0 -0.90625,0.40234 -0.90625,0.90625c0,0.50391 0.40234,0.90625 0.90625,0.90625c0.50391,0 0.90625,-0.40234 0.90625,-0.90625c0,-0.50391 -0.40234,-0.90625 -0.90625,-0.90625zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4z"></path></g></g></svg>
+                            </button>
+                            </a>
+
+                            <a href="https://twitter.com/elonmusk">
+                            <button class="card2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30px" height="30px" class="twitter"><path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path></svg>
+                            </button>
+                            </a>
+                        </div>
+                        <div class="down">
+
+                            <a href="https://www.facebook.com/zuck/">
+                            <button class="card3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px" class="github"><path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z"></path></svg>
+                            </button>
+                            </a>
+
+                            <a href="https://web.telegram.org/a/#720063033">
+                            <button class="card4">
+                                <svg height="25px" width="25px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="discord"><path d="M46.137,6.552c-0.75,-0.636 -1.928,-0.727 -3.146,-0.238h-0.002c-1.281,0.514 -36.261,15.518 -37.685,16.131c-0.259,0.09 -2.521,0.934 -2.288,2.814c0.208,1.695 2.026,2.397 2.248,2.478l8.893,3.045c0.59,1.964 2.765,9.21 3.246,10.758c0.3,0.965 0.789,2.233 1.646,2.494c0.752,0.29 1.5,0.025 1.984,-0.355l5.437,-5.043l8.777,6.845l0.209,0.125c0.596,0.264 1.167,0.396 1.712,0.396c0.421,0 0.825,-0.079 1.211,-0.237c1.315,-0.54 1.841,-1.793 1.896,-1.935l6.556,-34.077c0.4,-1.82 -0.156,-2.746 -0.694,-3.201zM22,32l-3,8l-3,-10l23,-17z"></path></svg>
+                            </button>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <p style="margin-bottom:0.6rem" class="text-center">© 2023 Все права защищены. Live Another Day.</p>
+                </div>
+            </div>
+        </div>
+
+</footer>
+</div>

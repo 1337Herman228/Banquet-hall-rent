@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+
+    <!-- Подключение библиотеки FullCalendar и ее зависимостей -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+    <style>
+
+        .block {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: -80%;
+            background-color: transparent;
+            transition: right 0.5s;
+        }
+
+        .block:hover {
+            right: 0;
+        }
+
+        .container {
+            position: relative;
+            font-family: sans-serif;
+        }
+
+        .container-glass .box {
+            width: 100%;
+            height: 500px;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.222);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-radius: .7rem;
+            transition: all ease .3s;
+        }
+
+        .container-glass .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .container-glass .box .title {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: .1em
+        }
+
+        .container-glass .box div strong {
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        .container-glass .box div p {
+            margin: 0;
+            font-size: .9em;
+            font-weight: 300;
+            letter-spacing: .1em;
+        }
+
+        .container-glass .box div span {
+            font-size: .7rem;
+            font-weight: 300;
+        }
+
+        .container-glass .box div span:nth-child(3) {
+            font-weight: 500;
+            margin-right: .2rem;
+        }
+
+        .container-glass .box:hover {
+            box-shadow: 0px 0px 20px 1px #ffbb763f;
+            border: 1px solid rgba(255, 255, 255, 0.454);
+        }
+
+
+        .date-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 40px;
+            margin: 5px;
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .fc-day-number
+        {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #calendar {
+        /*            margin-left: 15%;*/
+        /*            margin-right: 15%;*/
+        /*            width:70%;*/
+        /*            max-height:635px;*/
+        }
+        /*        .disabled:hover*/
+        /*        {*/
+
+        /*        }*/
+        #free_date:hover{
+        /*            color: #c05cf9c5;*/
+        /*            color: #ff9f00;*/
+            background-color: #ff9f00;
+        }
+
+        footer, .sexy_footer{
+            height:260px;
+        }
+
+        .fc-day:hover {
+            background-color: #ff9f00;
+        }
+
+        .main-table
+        {
+            border-radius:15px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ff00ff, #ff9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        table {
+            border: 1.5px solid black;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header th:insert="blocks/header-admin :: header-admin"> </header>
+
+<main>
+    <br>
+    <div class="container" style="border-radius:20px;width: 95%;height: 500px;position: relative;overflow: hidden;">
+        <img style="border-radius:20px" width="100%" height="100%" th:src = "@{/images/image{id}.png(id=${bh_id})}">
+        <div class="block" onmouseover="slideBlockIn()" onmouseout="slideBlockOut()">
+            <div style="max-width:50%">
+                <div class="container-glass">
+                    <div class="box">
+                        <div>
+                            <div class="hallIdDiv" th:id="${banquetHalls.banquet_halls_id}" style="display: none;"></div>
+                            <h1 style="color:#7e4caf" th:text="${banquetHalls.banquet_halls_name}"></h1>
+                            <p th:text="${banquetHalls.descript}"></p>
+                            <p th:text="'Категория: ' + ${banquetHalls.descript}"></p>
+                            <p style="color:#7e4caf" th:text="'Адрес: ' + ${banquetHalls.adress}"></p>
+                            <h1 style="color:#7e4caf" th:text="${banquetHalls.price} + ' BYN'"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br> <br> <br>
+
+    <div class="container" style="height:100%;width:90%">
+        <div class="row">
+            <div class="col-8" style="padding-right:20px">
+                <!-- Контейнер для календаря -->
+                <div id="calendar"></div>
+            </div>
+            <div class="col-4 py-5">
+                <div >
+                    <h2 class="gradient-text" style="font-weight:bold" >Как арендовать зал?</h2>
+                    <p style="margin-bottom:5px">Для того, чтобы арендовать зал выберите желаемую свободную дату в календаре слева и кликните по этой ячейке.</p>
+                    <p style="margin-bottom:3px">
+                        <svg style="border-radius:4px" width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="30" height="30" stroke="transparent" fill="gray"/>
+                        </svg>
+                        - Недоступная дата
+                    </p>
+                    <p style="margin-bottom:5px">
+                        <svg style="border-radius:4px" width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="30" height="30" stroke="transparent" fill="#ff9f00"/>
+                        </svg>
+                        - Зал уже забронирован
+                    </p>
+                    <p style="margin-bottom:5px">Заполните небольшую форму - и вуа-ля! Вы успешно забронировали зал.</p>
+                    <p>Вы можете просмотреть арендованные вами банкетные залы в разделе <a style="font-weight:bold;" class="gradient-text">Мои заказы</a> и, в случае необходимости, отменить бронь</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+</main>
+
+<!--<script>-->
+<!--    function btn_view(event) {-->
+<!--        var date = event.target.id;-->
+<!--        var hallId = document.querySelector('.hallIdDiv').id;-->
+<!--        var url = '/banquet-hall-rent/' + hallId + '/' + date-->
+
+<!--        var form = document.createElement('form');-->
+<!--        form.action = url;-->
+<!--        form.method = 'GET';-->
+
+<!--        document.body.appendChild(form);-->
+<!--        form.submit();-->
+<!--    }-->
+<!--</script>-->
+
+
+<script>
+    $(document).ready(function() {
+        // Инициализация календаря
+        $('#calendar').fullCalendar({
+            // Настройки календаря
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            defaultView: 'month',
+            editable: true,
+        });
+    });
+</script>
+
+<script th:inline="javascript">
+    var myArray = [
+        /*[# th:each="value : ${dateArrayList}"]*/
+        /*[[${value}]]*/,
+        /*[/]*/
+    ];
+
+    calendar(myArray);
+    calendar_btn_prev(myArray);
+    calendar_btn_next(myArray);
+    calendar_btn_today(myArray);
+
+    function makeLinks(array) {
+        var widgetContents = document.getElementsByClassName('fc-day')
+        var todayDate = new Date()
+
+        for (var i = 0; i < widgetContents.length; i++) {
+            var el = widgetContents[i];
+            var dateToWrite =  el.getAttribute('data-date');
+            var date =  new Date (el.getAttribute('data-date'));
+
+            if (array.includes(dateToWrite)) { // Дата занята
+                el.style.backgroundColor = "#ff9f00";
+                el.style.color = "white";
+                el.classList.add('busy');
+                el.style.border = "1.5px solid black";
+            }
+            else if(todayDate <= date)// Дата свободна
+            {
+
+//                el.setAttribute("onclick", "btn_view(event)");
+                el.classList.add('free');
+                //              el.id = "free_date";
+                el.id = dateToWrite;
+                el.style.border = "1.5px solid black";
+
+            }
+            if(todayDate > date) // Прошедшая дата
+            {
+                el.style.backgroundColor = "gray";
+                el.classList.add('past_date');
+                el.style.border = "1.5px solid black";
+            }
+
+        }
+
+        var widgetContentsTop = document.getElementsByClassName('fc-day-top')
+
+        for (var i = 0; i < widgetContentsTop.length; i++) {
+            var el = widgetContentsTop[i];
+            var dateToWrite_1 =  el.getAttribute('data-date');
+            var date_1 = new Date(el.getAttribute('data-date'));
+
+            if (array.includes(dateToWrite_1)) {
+                el.style.color = "white";
+            }
+            else if(todayDate <= date_1)
+            {
+//                el.setAttribute("onclick", "btn_view(event)");
+                el.id = dateToWrite_1;
+                el.classList.add('free');
+            }
+
+        }
+    }
+
+    function calendar(array) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+
+                makeLinks(myArray);
+
+                var spans = document.querySelectorAll('span.fc-day-number')
+                for(var i = 0; i<spans.length;i++){
+                    spans[i].style.pointerEvents = 'none';
+                }
+
+                document.querySelector('table').classList.add('main-table');
+
+            }, 150);
+        });
+    }
+
+    function calendar_btn_prev(array) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+
+                var button = document.querySelector('.fc-prev-button');
+                button.addEventListener('mouseup', function() {
+                    setTimeout(function() {
+
+                        makeLinks(myArray);
+
+                    }, 100)
+
+                }, 100);
+            });
+        });
+    }
+
+    function calendar_btn_next(array) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+
+                var button = document.querySelector('.fc-next-button');
+                button.addEventListener('mouseup', function() {
+                    setTimeout(function() {
+
+                        makeLinks(myArray);
+
+                    }, 100)
+
+                }, 100);
+            });
+        });
+    }
+
+    function calendar_btn_today(array) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+
+                var button = document.querySelector('.fc-today-button');
+                button.addEventListener('mouseup', function() {
+                    setTimeout(function() {
+                        makeLinks(myArray);
+                    }, 100)
+
+                }, 100);
+            });
+        });
+    }
+
+
+</script>
+
+<footer th:insert="blocks/footer :: footer"> </footer>
+
+<script>
+    function slideBlockIn() {
+        const block = document.querySelector('.block');
+
+        block.style.right = '-50%';
+    }
+
+    function slideBlockOut() {
+        const block = document.querySelector('.block');
+
+        block.style.right = '-80%';
+    }
+</script>
+
+
+
+</body>
+
+</html>

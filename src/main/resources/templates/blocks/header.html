@@ -1,0 +1,167 @@
+
+<div th:fragment="header" style="margin-left:10px">
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <style>
+/*        body {*/
+/*            background-color: rgb(30,30,30);*/
+/*        }*/
+/*        */
+        .dropbtn {
+      background-color: rgb(33,37,41);
+      color: white;
+      padding: 8px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: #7e4caf;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #ddd;}
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {display:block;}
+
+    .gradient-text {
+        background: linear-gradient(to right, #ff00ff, #ff9900);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .active {
+        background-color: #7e4caf;
+    }
+    .nav-link:hover {
+        color: #ffffff;
+    }
+
+    </style>
+
+    <script>
+
+        function myFunction(id) {
+             var dropdowns = document.getElementsByClassName("dropdown-content");
+             for (j = 1; j <= dropdowns.length ; j++){
+             document.getElementById("myDropdown" + j).classList.remove("show");}
+             document.getElementById(id).classList.toggle("show");
+        }
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+    </script>
+
+        <a class="dropbtn btn btn-secondary " href="/banquet-halls">Главная</a>
+        <a class="dropbtn btn btn-secondary " href="/favorite">Избранное</a>
+        <a class="dropbtn btn btn-secondary " href="/my-orders">Мои заказы</a>
+
+<!--        <div class="dropdown" style="margin:10px">-->
+<!--            <button onclick="myFunction('myDropdown1')" class="dropbtn btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Учетные записи</button>-->
+<!--            <div id="myDropdown1" class="dropdown-content dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">-->
+
+<!--                <a href="/role">Роли</a>-->
+<!--                <a href="/role/add">Добавить роль</a>-->
+<!--                <hr style="margin:0.5rem; color:#4dafe8; border-top: 1.3px solid; opacity: 0.5;">-->
+<!--                <a href="/users">Учётные записи</a>-->
+<!--                <a href="/users/add">Добавить учётную запись</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="dropdown" style="margin:10px">-->
+<!--            <button onclick="myFunction('myDropdown2')" class="dropbtn btn btn-secondary dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Заказы</button>-->
+<!--            <div id="myDropdown2" class="dropdown-content dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">-->
+<!--                <a href="/purchases">Заказы</a>-->
+<!--                <a href="/purchases/add">Добавить заказ</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="dropdown" style="margin:10px">-->
+<!--            <button onclick="myFunction('myDropdown3')" class="dropbtn btn btn-secondary dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Банкетные залы</button>-->
+<!--            <div id="myDropdown3" class="dropdown-content dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">-->
+<!--                <a href="/category">Категории</a>-->
+<!--                <a href="/category/add">Добавить категорию</a>-->
+<!--                <hr style="margin:0.5rem; color:#4dafe8; border-top: 1.3px solid; opacity: 0.5;">-->
+<!--                <a href="/halls">Залы</a>-->
+<!--                <a href="/halls/add">Добавить зал</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <a class="dropbtn btn btn-secondary " href="/about">Про нас</a>
+        <a class="dropbtn btn btn-secondary " href="/login">Выйти</a>
+
+
+    <header class="p-2 text-bg-dark fixed-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a style="margin-right:50px;font-size:24px;font-family:segoe print;font-weight:bold" href="/about" class="gradient-text d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    Live Another Day
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li style="margin-right:7px"> <a style="font-family:sans-serif" class="nav-link dropbtn btn btn-secondary " href="/banquet-halls">Главная</a></li>
+                    <li style="margin-right:7px"> <a style="font-family:sans-serif" class="nav-link dropbtn btn btn-secondary " href="/favorite">Избранное</a></li>
+                    <li style="margin-right:7px"><a style="font-family:sans-serif" class="nav-link dropbtn btn btn-secondary " href="/my-orders">Мои заказы</a></li>
+                    <li><a style="font-family:sans-serif" class="nav-link dropbtn btn btn-secondary " href="/about">Про нас</a></li>
+                </ul>
+
+<!--                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">-->
+<!--                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">-->
+<!--                </form>-->
+
+                <div class="text-end">
+                    <a style="font-family:sans-serif" href="/login"><button type="button" class="dropbtn btn btn-secondary">Выйти</button></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        var currentPage = window.location.pathname.split('/').pop(); // Получаем имя текущей страницы
+        var activeLink = document.querySelectorAll('.nav-link[href="/' + currentPage + '"]');
+        activeLink[0].classList.add('active');
+    </script>
+
+</div>
+
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+
+            background-color: #7e4caf;
+            color: #fff;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #e79a11;
+        }
+
+        .message {
+            color: #7e4caf;
+        }
+
+        .message:hover {
+            color: #e79a11;
+        }
+        .form-control:focus {
+            border-color: #7e4caf;
+            box-shadow: 0 0 5px #7e4caf;
+        }
+
+        .toggle-icon {
+            width:30px;
+            height:30px;
+            position: absolute;
+            top: 209px;
+            right: 42px;
+/*            transform: translateY(-50%);*/
+/*            cursor: pointer;*/
+        }
+    </style>
+    </style>
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container" style="position:relative">
+        <h2 class="text-center">Sign in</h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Login</label>
+                <input name="login" type="text" id="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input style=" padding-right: 24px;" name="password"  type="password" id="password" class="form-control" required>
+
+                <span class="toggle-icon" onclick="togglePasswordVisibility()">
+                   <img width="21px" height="21px" src="./images/eye_open.png"/>
+                </span>
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+        </form>
+        <p class= "text-center mt-3">Don't have an account? <a href="/reg" class="message">Register</a></p>
+        <p style="color: #fa3030" th:text="${errorMessage}"></p>
+        <p style="color: #3ef53e" th:text="${regMessage}"></p>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var toggleIcon = document.querySelector(".toggle-icon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.innerHTML = '<img width="21px" height="21px" src="./images/eye_close.png"/>'; // Измените иконку на переключение видимости пароля
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.innerHTML = '<img width="21px" height="21px" src="./images/eye_open.png"/>'; // Измените иконку на переключение видимости пароля
+        }
+    }
+</script>
+
+</body>
+</html>
